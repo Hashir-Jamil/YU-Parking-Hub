@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="view/home/" kind="src" path="src"/>
+	<classpathentry kind="src" path="src/view/home"/>
+	<classpathentry kind="lib" path="lib/gson-2.10.jar"/>
+	<classpathentry kind="lib" path="lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/jdatepicker-1.3.4.jar"/>
+	<classpathentry kind="output" path="out/production/MyParkingProject"/>
+</classpath>
