@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository implements Repository {
-    private static final String filePath = "src/doa/" + Constants.USER_TABLE;
+    private static final String filePath = "src/main/java/doa/" + Constants.USER_TABLE;
     private List<User> users;
 
     public UserRepository() {

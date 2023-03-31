@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ParkingRepository implements Repository {
 
-    private static final String db2 = "src/doa/parkingLots.json";
+    private static final String db2 = "src/main/java/doa/parkingLots.json";
 
     public void updateParkingLots(List<ParkingLot> parkingLots) {
         GsonBuilder builder = new GsonBuilder();

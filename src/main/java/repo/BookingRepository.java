@@ -13,7 +13,7 @@ import java.util.List;
 
 public class BookingRepository implements Repository {
 
-    private static final String db2 = "src/doa/booking.json";
+    private static final String db2 = "src/main/java/doa/booking.json";
 
     public void updateBookings(List<Booking> bookings) {
         GsonBuilder builder = new GsonBuilder();
