@@ -9,11 +9,14 @@ import java.util.List;
 
 public class ManagerServices {
 
-    public static List<ParkingLot> parkingLots = new ArrayList<>();
+    public static List<ParkingLot> parkingLots;
     private static ManagerServices managerServices = new ManagerServices();
     RepositoryProvider repositoryProvider = new RepositoryProvider();
     private ParkingRepository parkingRepository = repositoryProvider.getParkingRepository();
 
+    private ManagerServices(){
+        this.loadLots();
+    }
     public static ManagerServices getInstance() {
         return managerServices;
     }
