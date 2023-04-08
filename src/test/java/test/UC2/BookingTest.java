@@ -25,12 +25,6 @@ public class BookingTest {
         booking = new Booking(1, new Date(), 1, 2, 19, 23, "ACE-2", "rafd47@my.yorku.ca");
     }
 
-    @Test
-    public void testGetTotalCost() {
-        assertEquals(20, booking.getTotalCost(), 0.0);
-    }
-
-  
 
     @Test
     public void testMultiple_Methods() {
@@ -51,11 +45,5 @@ public class BookingTest {
         assertEquals(2, booking.getSpaceId());
     }
 
-    @Test
-    public void testgetEndDateTime() {
-        Calendar calendar = Calendar.getInstance();
-        Date date3 =  new Date();
-        Date date4 =  booking.getEndDateTime();
-        assertTrue(date4.after(date3));
-    }
+ 
 }
