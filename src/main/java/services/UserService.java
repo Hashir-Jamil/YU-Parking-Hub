@@ -11,7 +11,7 @@ public class UserService {
     RepositoryProvider repositoryProvider = new RepositoryProvider();
     public final UserRepository userRepository = repositoryProvider.getUserRepository();
 
-    private UserService() {
+    public UserService() {
 
     }
 
