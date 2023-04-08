@@ -15,8 +15,8 @@ public class CheckoutDetails extends javax.swing.JFrame {
     /**
      * Creates new form ViewDetails
      */
-    private Booking currentString;
-    private ClientView clientView;
+    public Booking currentString;
+    public ClientView clientView;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.List checkoutList;
     private javax.swing.JLabel jLabel5;

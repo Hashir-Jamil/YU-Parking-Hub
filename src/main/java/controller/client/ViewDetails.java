@@ -9,7 +9,7 @@ import model.booking.Booking;
 
 public class ViewDetails extends javax.swing.JFrame {
 
-    private Booking currentBooking;
+    public Booking currentBooking;
     /**
      * @param args the command line arguments
      */
