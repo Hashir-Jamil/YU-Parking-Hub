@@ -1,4 +1,4 @@
-package UC2;
+package UC3;
 
 import controller.checkout.CheckoutView;
 
