@@ -1,7 +1,5 @@
-package test.UC2;
+package UC2;
 
-
-import javax.swing.*;
 
 import org.junit.Before;
 import org.junit.Test;

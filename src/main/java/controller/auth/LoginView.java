@@ -27,11 +27,13 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JButton loginBtn;
     private javax.swing.JPasswordField passTf;
     private javax.swing.JLabel registerBtn;
+    private boolean viewOpened = false;
 
     /**
      * Creates new form NewJFrame
      */
     public LoginView() {
+        viewOpened = true;
         initComponents();
     }
 
@@ -245,6 +247,10 @@ public class LoginView extends javax.swing.JFrame {
 
             }
         });
+    }
+
+    public boolean getViewOpened() {
+        return this.viewOpened;
     }
     // End of variables declaration
 }

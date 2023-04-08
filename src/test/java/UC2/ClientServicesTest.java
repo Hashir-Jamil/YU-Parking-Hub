@@ -1,12 +1,10 @@
-package test.UC2;
+package UC2;
 
 
 import model.booking.Booking;
 import model.parking.ParkingLot;
-import model.parking.ParkingSpace;
 import services.ClientServices;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;

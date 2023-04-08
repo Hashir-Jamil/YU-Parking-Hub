@@ -1,4 +1,4 @@
-package test.UC2;
+package UC2;
 
 import model.booking.Booking;
 import model.user.Credentials;

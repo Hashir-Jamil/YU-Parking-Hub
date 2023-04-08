@@ -1,7 +1,6 @@
-package test.UC2;
+package UC2;
 
 import controller.checkout.CheckoutView;
-import controller.client.ViewDetails;
 
 import model.booking.Booking;
 import org.junit.Before;

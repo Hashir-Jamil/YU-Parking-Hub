@@ -26,11 +26,13 @@ public class RegisterView extends javax.swing.JFrame {
     private javax.swing.JPasswordField passTf;
     private javax.swing.JButton registerBtn;
     private javax.swing.JComboBox<String> typeTf;
+    private boolean viewOpened = false;
 
     /**
      * Creates new form NewJFrame
      */
     public RegisterView() {
+        viewOpened = true;
         initComponents();
     }
 
@@ -252,6 +254,10 @@ public class RegisterView extends javax.swing.JFrame {
 
             }
         });
+    }
+
+    public boolean getViewOpened() {
+        return this.viewOpened;
     }
     // End of variables declaration
 }

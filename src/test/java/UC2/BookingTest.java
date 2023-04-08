@@ -1,4 +1,4 @@
-package test.UC2;
+package UC2;
 
 
 import org.junit.Assert;
@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import model.booking.Booking;
 
-import java.util.Calendar;
 import java.util.Date;
 
 
