@@ -7,7 +7,7 @@ public class SuperManager extends User {
         super(new Credentials("Admin", "Admin", "SuperManager"));
     }
 
-    public SuperManager getInstance() {
+    public static SuperManager getInstance() {
         return supermanager;
     }
 }

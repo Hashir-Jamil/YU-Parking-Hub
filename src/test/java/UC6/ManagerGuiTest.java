@@ -12,6 +12,7 @@ import controller.client.ClientView;
 import controller.manager.ManagerGUI;
 import model.booking.Booking;
 import model.user.Credentials;
+import model.user.Manager;
 import model.user.User;
 
 
@@ -23,7 +24,7 @@ public class ManagerGuiTest {
 	    @Before
 	    public void setUp() {
 	        Credentials newCredentials = new Credentials("MANAGER2@MANAGER.COM", "MANAGER2@MANAGER.COM", "MANAGER");
-	        user = new User(newCredentials);
+	        user = new Manager(newCredentials);
 	        managerView = new ManagerGUI(user);
 	    }
 	    @Test

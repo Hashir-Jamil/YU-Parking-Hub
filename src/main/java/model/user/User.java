@@ -14,7 +14,8 @@ public class User {
 
     public User(String email, String password, String type) {
         Credentials newCredentials = new Credentials(email, password, type);
-
+        this.credentials = newCredentials; 
+        
         if(type.equals(Constants.VISITOR) || type.equals(Constants.MANAGER)){
             validated = true;
         }
@@ -23,6 +24,8 @@ public class User {
     public Credentials getCredentials() {
         return this.credentials;
     }
+    
+   
 
     @Override
     public boolean equals(Object o) {
