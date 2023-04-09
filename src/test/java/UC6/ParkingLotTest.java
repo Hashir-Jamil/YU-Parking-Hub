@@ -1,16 +1,21 @@
-import model.parking.ParkingLot;
-import model.parking.ParkingSpace;
-import org.junit.Test;
-import services.ManagerServices;
+package UC6;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
-public class TesterUseCaseSix {
-    //Testing managers adding/enabling/disabling parking spaces/lots
+import model.parking.ParkingLot;
+import model.parking.ParkingSpace;
+import services.ManagerServices;
+
+public class ParkingLotTest {
 
     @Test
     public void parkingLotTest1(){

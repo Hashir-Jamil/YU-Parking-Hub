@@ -27,11 +27,12 @@ public class SuperManagerView extends javax.swing.JFrame {
     private javax.swing.JButton logoutBtn;
     private javax.swing.JTextField passTf;
     private javax.swing.JLabel title;
-
+    private boolean viewOpened = false;
     /**
      * Creates new form SuperManagerView
      */
     public SuperManagerView() {
+    	setViewOpened(true);
         initComponents();
     }
 //
@@ -258,4 +259,12 @@ public class SuperManagerView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_createBtnActionPerformed
     // End of variables declaration//GEN-END:variables
+
+	public boolean isViewOpened() {
+		return viewOpened;
+	}
+
+	public void setViewOpened(boolean viewOpened) {
+		this.viewOpened = viewOpened;
+	}
 }

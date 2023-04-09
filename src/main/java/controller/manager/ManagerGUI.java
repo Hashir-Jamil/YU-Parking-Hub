@@ -22,7 +22,7 @@ import static java.lang.Integer.parseInt;
 
 public class ManagerGUI extends javax.swing.JFrame {
 
-    private User currentManager;
+    public User currentManager;
     private JPanel mainManagerPanel;
     private JTable lotTable, spaceTable;
     private DefaultTableModel lotModel, spaceModel;
@@ -158,20 +158,20 @@ public class ManagerGUI extends javax.swing.JFrame {
         this.setVisible(true);
 
     }
-
-    public static void main(String[] args) {
-
-        //Testing Sensor Car Observer
-        ManagerServices pkManager = ManagerServices.getInstance();
-
-        pkManager.getAllParkingLots().get(0).getParkingSpaces().get(0).getSensor();
-        JFrame mainFrame = new ManagerGUI(new User(new Credentials("temp", "temp", "Manager")));
-        mainFrame.setTitle("Parking Management System");
-        mainFrame.setSize(400, 530);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setVisible(true);
-
-    }
+//
+//    public static void main(String[] args) {
+//
+//        //Testing Sensor Car Observer
+//        ManagerServices pkManager = ManagerServices.getInstance();
+//
+//        pkManager.getAllParkingLots().get(0).getParkingSpaces().get(0).getSensor();
+//        JFrame mainFrame = new ManagerGUI(new User(new Credentials("temp", "temp", "Manager")));
+//        mainFrame.setTitle("Parking Management System");
+//        mainFrame.setSize(400, 530);
+//        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        mainFrame.setVisible(true);
+//
+//    }
 
     private void addLot() {
         JFrame frame = new JFrame();
