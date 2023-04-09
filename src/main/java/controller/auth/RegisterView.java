@@ -230,7 +230,7 @@ public class RegisterView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
-    private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {
+    public void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         String email = emailTf.getText();
         String pass = passTf.getText();
@@ -245,7 +245,7 @@ public class RegisterView extends javax.swing.JFrame {
         }
     }
 
-    private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {
+    public void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
