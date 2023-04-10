@@ -173,7 +173,7 @@ public class ManagerGUI extends javax.swing.JFrame {
 //
 //    }
 
-    private void addLot() {
+    public void addLot() {
         JFrame frame = new JFrame();
         Object result = JOptionPane.showInputDialog(frame, "Enter Parking Lot Location:");
 

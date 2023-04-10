@@ -18,14 +18,14 @@ import javax.swing.*;
 public class LoginView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify
-    private javax.swing.JTextField emailTf;
+    public javax.swing.JTextField emailTf;
     private javax.swing.JLabel error;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton loginBtn;
-    private javax.swing.JPasswordField passTf;
+    public javax.swing.JPasswordField passTf;
     private javax.swing.JLabel registerBtn;
     private boolean viewOpened = false;
 
@@ -214,7 +214,7 @@ public class LoginView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
-    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {
+    public void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
 
         String email = emailTf.getText();

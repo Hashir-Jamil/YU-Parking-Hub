@@ -7,7 +7,7 @@ import repo.UserRepository;
 public class UserService {
 
 
-    private static UserService userService = new UserService();
+    public static UserService userService = new UserService();
     RepositoryProvider repositoryProvider = new RepositoryProvider();
     public final UserRepository userRepository = repositoryProvider.getUserRepository();
 

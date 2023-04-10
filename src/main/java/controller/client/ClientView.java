@@ -24,13 +24,13 @@ public class ClientView extends javax.swing.JFrame {
     DefaultTableModel spaceModel = new DefaultTableModel();
     private User currentUser;
     // Variables declaration - do not modify
-    private javax.swing.JTable bookingTable;
+    public javax.swing.JTable bookingTable;
     private javax.swing.JButton cancelBtn;
-    private javax.swing.JButton checkoutBtn;
-    private javax.swing.JComboBox<String> endTime;
+    public javax.swing.JButton checkoutBtn;
+    public javax.swing.JComboBox<String> endTime;
     private javax.swing.JButton extendBtn;
     private javax.swing.Box.Filler filler1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    public com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -45,11 +45,11 @@ public class ClientView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField licenceTf;
-    private javax.swing.JComboBox<String> locationTf;
+    public javax.swing.JTextField licenceTf;
+    public javax.swing.JComboBox<String> locationTf;
     private javax.swing.JButton logoutBtn;
-    private javax.swing.JTable spaceTable;
-    private javax.swing.JComboBox<String> startTime;
+    public javax.swing.JTable spaceTable;
+    public javax.swing.JComboBox<String> startTime;
     private javax.swing.JButton viewBtn;
     private javax.swing.JButton updateBookingBtn;
     private javax.swing.JButton checkOutBtn;
@@ -57,7 +57,7 @@ public class ClientView extends javax.swing.JFrame {
      * Creates new form ClientView
      */
 
-    private Booking currentBooking;
+    public Booking currentBooking;
 
     public ClientView(User user) {
         currentUser = user;
@@ -555,7 +555,7 @@ public class ClientView extends javax.swing.JFrame {
 
     }
 
-    private void extendBtnActionPerformed(java.awt.event.ActionEvent evt) {
+    public void extendBtnActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         int selectedIndex = bookingTable.getSelectedRow();
         int selectedBooking = 0;
@@ -591,7 +591,7 @@ public class ClientView extends javax.swing.JFrame {
 
     }
 
-    private void checkoutBtnActionPerformed(java.awt.event.ActionEvent evt) {
+    public void checkoutBtnActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
 
         if (checkoutBtn.getText().equals("Update")
@@ -694,12 +694,12 @@ public class ClientView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
-    private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {
+    public void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         int selectedIndex = bookingTable.getSelectedRow();
         int selectedBooking = 0;
         if (selectedIndex != -1) {
-            selectedBooking = Integer.parseInt((String) bookingTable.getValueAt(selectedIndex, 0));
+            selectedBooking = (int) bookingTable.getValueAt(selectedIndex, 0);
             Booking booking = ClientServices.getInstance().getBookingById(selectedBooking);
             if (booking != null) {
 

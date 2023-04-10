@@ -15,7 +15,7 @@ public class ClientServices {
     private static ClientServices clientServices = new ClientServices();
     RepositoryProvider repositoryProvider = new RepositoryProvider();
     private ParkingRepository parkingRepository = repositoryProvider.getParkingRepository();
-    private BookingRepository bookingRepository = repositoryProvider.getBookingRepository();
+    public BookingRepository bookingRepository = repositoryProvider.getBookingRepository();
 
     private ClientServices() {
 

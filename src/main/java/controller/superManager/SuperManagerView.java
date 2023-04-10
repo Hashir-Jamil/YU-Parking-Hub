@@ -20,12 +20,12 @@ public class SuperManagerView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton autoGenerateBtn;
     private javax.swing.JButton createBtn;
-    private javax.swing.JTextField emailTf;
+    public javax.swing.JTextField emailTf;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton logoutBtn;
-    private javax.swing.JTextField passTf;
+    public javax.swing.JTextField passTf;
     private javax.swing.JLabel title;
     private boolean viewOpened = false;
     /**
@@ -220,7 +220,7 @@ public class SuperManagerView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_emailTfActionPerformed
 
-    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
+    public void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -235,7 +235,7 @@ public class SuperManagerView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_passTfActionPerformed
 
-    private void autoGenerateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autoGenerateBtnActionPerformed
+    public void autoGenerateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autoGenerateBtnActionPerformed
         // TODO add your handling code here:
         String email = SuperManagerServices.getInstance().generateRandomEmail();
         String password = SuperManagerServices.getInstance().generateStrongPassword();
@@ -243,7 +243,7 @@ public class SuperManagerView extends javax.swing.JFrame {
         this.passTf.setText(password);
     }//GEN-LAST:event_autoGenerateBtnActionPerformed
 
-    private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
+    public void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
         // TODO add your handling code here:
         String email = emailTf.getText();
         String pass = passTf.getText();

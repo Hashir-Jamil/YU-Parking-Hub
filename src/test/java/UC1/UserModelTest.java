@@ -2,6 +2,7 @@ package UC1;
 import org.junit.Test;
 
 import model.user.Credentials;
+import model.user.FacultyMember;
 import model.user.Student;
 import model.user.SuperManager;
 import model.user.User;
@@ -48,6 +49,18 @@ public class UserModelTest {
         assertTrue(user1.equals(user2));
         assertFalse(user1.equals(user3));
         
+        Credentials credentials11 = new Credentials("Login", "Password", "Type");
+        FacultyMember facultyMember = new FacultyMember(credentials11);
+        assertNull(facultyMember.getFacultyName());
+
+        FacultyMember facultyMember1 = new FacultyMember(credentials11, "Test Faculty", "12345");
+        assertEquals("Test Faculty", facultyMember1.getFacultyName());
+        assertEquals("12345", facultyMember1.getFacultyId());
+
+        facultyMember1.setFacultyName("User Faculty");
+        facultyMember1.setFacultyId("56789");
+        assertEquals("User Faculty", facultyMember1.getFacultyName());
+        assertEquals("56789", facultyMember1.getFacultyId());
         assertEquals(email, user.getCredentials().getLogin());
         assertEquals(password, user.getCredentials().getPassword());
         assertEquals(type, user.getCredentials().getType());
