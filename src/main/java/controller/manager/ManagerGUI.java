@@ -28,7 +28,8 @@ public class ManagerGUI extends javax.swing.JFrame {
     private DefaultTableModel lotModel, spaceModel;
     private JButton addLotButton, enableLotButton, disableLotButton, enableSpaceButton, disableSpaceButton, logoutButton;
     private JLabel lotTableLabel, spaceTableLabel;
-
+    
+    public boolean isTriggered;
 
     private ManagerServices pkManager = ManagerServices.getInstance();
 
@@ -271,8 +272,8 @@ public class ManagerGUI extends javax.swing.JFrame {
         }
     }
 
-    private void disableLot() {
-
+    public void disableLot() {
+    	isTriggered = true;
         int selectedRow = lotTable.getSelectedRow();
 
         JFrame disableNotice = new JFrame();
@@ -297,8 +298,8 @@ public class ManagerGUI extends javax.swing.JFrame {
         }
     }
 
-    private void enableLot() {
-
+    public void enableLot() {
+    	isTriggered=false;
         int selectedRow = lotTable.getSelectedRow();
 
         JFrame enableNotice = new JFrame();

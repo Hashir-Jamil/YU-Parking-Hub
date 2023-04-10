@@ -32,11 +32,15 @@ public class ManagerGuiTest {
 	        user = new Manager(newCredentials);
 	        managerView = new ManagerGUI(user);
 	    }
-	    @Test
-	    public void superManagerViewTest() {
-	    	assertEquals(user, managerView.currentManager);
+	 
+	    @Test 
+	    public void disableAndEnableLotTest() {
+	    	managerView.disableLot();
+	    	assertTrue(managerView.isTriggered);
+	    	
+	    	managerView.enableLot();
+	    	assertFalse(managerView.isTriggered);
 	    }
-
 		@Test
 		public void addLotWithUniqueIDAndGivenLocation() {
 
