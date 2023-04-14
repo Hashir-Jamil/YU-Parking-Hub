@@ -48,9 +48,6 @@ public class RegisterViewTest {
     public void registrationViewTest() {
         registerView = new RegisterView();
         assertTrue(registerView.getViewOpened());
-    }
-    @Test
-    public void testRegisterBtnActionPerformed() {
 
         emailTf = new JTextField();
         passTf = new JPasswordField();
@@ -72,10 +69,7 @@ public class RegisterViewTest {
         }
 
         assertEquals("Your Email is not valid", error.getText());
-    }
-
-    @Test
-    public void testloginBtnMouseClicked(){
+        
         loginView = new LoginView();
         assertFalse(loginView.isVisible());
 
@@ -84,5 +78,4 @@ public class RegisterViewTest {
 
         assertFalse(registerView.isVisible());
     }
-    
 }

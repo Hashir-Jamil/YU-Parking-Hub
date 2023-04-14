@@ -22,13 +22,13 @@ import static org.junit.Assert.*;
 import static services.UserService.userService;
 
 public class SuperManagerViewTest {
-	    private SuperManagerView superView;
-	   
-	    @Test
-	    public void superManagerViewTest() {
-	        superView = new SuperManagerView();
-	        assertTrue(superView.isViewOpened());
-	    }
+    private SuperManagerView superView;
+   
+    @Test
+    public void superManagerViewTest() {
+        superView = new SuperManagerView();
+        assertTrue(superView.isViewOpened());
+    }
 
 	@Test
 	public void testAutoGenerateBtnActionPerformed() {

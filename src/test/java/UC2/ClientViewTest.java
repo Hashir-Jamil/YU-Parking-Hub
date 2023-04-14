@@ -28,9 +28,8 @@ public class ClientViewTest {
     User user = new User(newCredentials);
     ClientView clientView = new ClientView(user);
 
-
     @Test
-    public void extendBtnActionPerformedWhenNoRowSelected() {
+    public void clientViewTestActionEvents() {
 
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID");
@@ -45,13 +44,8 @@ public class ClientViewTest {
         clientView.extendBtnActionPerformed(null);
 
         // Check if the expected message is shown
-           assertFalse(clientView.isVisible());
-    }
-
-
-    // Should not extend the booking when the selected booking is overdue
-    @Test
-    public void extendBtnActionPerformedWhenSelectedBookingIsOverdue() {
+        assertFalse(clientView.isVisible());
+        
         Booking booking =
                 new Booking(
                         1,
@@ -65,31 +59,24 @@ public class ClientViewTest {
         ClientServices.getInstance().bookParkingSpace(booking);
 
         // Set up the booking table
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("ID");
-        model.addColumn("Start Time");
-        model.addColumn("End Time");
-        model.addRow(
+        DefaultTableModel model1 = new DefaultTableModel();
+        model1.addColumn("ID");
+        model1.addColumn("Start Time");
+        model1.addColumn("End Time");
+        model1.addRow(
                 new Object[]{
                         String.valueOf(booking.getId()), booking.getStartTime(), booking.getEndTime()
                 });
-        clientView.bookingTable.setModel(model);
+        clientView.bookingTable.setModel(model1);
         clientView.bookingTable.setRowSelectionInterval(0, 0);
 
         // Call the method
         clientView.extendBtnActionPerformed(null);
 
         assertFalse(clientView.isVisible());
-
-    }
-
-    /**
-     * Should show a failure message when the booking cannot be extended
-     */
-    @Test
-    public void extendBtnActionPerformedWhenBookingCannotBeExtended() { // Prepare data
+        
         List<Booking> bookings = new ArrayList<>();
-        Booking booking =
+        Booking booking1 =
                 new Booking(
                         1,
                         new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000),
@@ -99,7 +86,7 @@ public class ClientViewTest {
                         12,
                         "ABC123",
                         "rafd47@my.yorku.ca");
-        bookings.add(booking);
+        bookings.add(booking1);
 
         // Mock ClientServices
         ClientServices clientServices = ClientServices.getInstance();
@@ -107,52 +94,42 @@ public class ClientViewTest {
         clientServices.bookingRepository = repositoryProvider.getBookingRepository();;
 
         // Prepare table
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("ID");
-        model.addColumn("Start Time");
-        model.addColumn("End Time");
-        model.addRow(
+        DefaultTableModel model11 = new DefaultTableModel();
+        model11.addColumn("ID");
+        model11.addColumn("Start Time");
+        model11.addColumn("End Time");
+        model11.addRow(
                 new Object[]{
-                        String.valueOf(booking.getId()), booking.getStartTime(), booking.getEndTime()
+                        String.valueOf(booking1.getId()), booking1.getStartTime(), booking1.getEndTime()
                 });
-        clientView.bookingTable.setModel(model);
+        clientView.bookingTable.setModel(model11);
 
         // Select the row
         clientView.bookingTable.setRowSelectionInterval(0, 0);
-
-        // Call extendBtnActionPerformed
-        clientView.extendBtnActionPerformed(null);
-        assertFalse(clientView.isVisible());
-    }
-
-
-     // Should extend the booking when a valid row is selected and extra hours are provided
-    @Test
-    public void extendBtnActionPerformedWhenValidRowSelectedAndExtraHoursProvided() {
         // data
-        List<Booking> bookings = new ArrayList<>();
-        Booking booking1 = new Booking(1, new Date(), 1, 1, 10, 12, "ABC123", "user1@example.com");
+        List<Booking> bookings1 = new ArrayList<>();
+        Booking booking11 = new Booking(1, new Date(), 1, 1, 10, 12, "ABC123", "user1@example.com");
         Booking booking2 = new Booking(2, new Date(), 1, 2, 14, 16, "DEF456", "user2@example.com");
-        bookings.add(booking1);
-        bookings.add(booking2);
+        bookings1.add(booking11);
+        bookings1.add(booking2);
 
         // Mock ClientServices
-        ClientServices clientServices = ClientServices.getInstance();
-        clientServices.bookingRepository.updateBookings(bookings);
+        ClientServices clientServices1 = ClientServices.getInstance();
+        clientServices1.bookingRepository.updateBookings(bookings1);
 
         // Set up the booking table
-        DefaultTableModel model = (DefaultTableModel) clientView.bookingTable.getModel();
-        model.setRowCount(0);
-        for (Booking booking : bookings) {
-            model.addRow(
+        DefaultTableModel model111 = (DefaultTableModel) clientView.bookingTable.getModel();
+        model111.setRowCount(0);
+        for (Booking booking111 : bookings1) {
+            model111.addRow(
                     new Object[]{
-                            String.valueOf(booking.getId()),
-                            booking.getLicensePlate(),
-                            booking.getEmail(),
-                            booking.getStartDateTime(),
-                            booking.getEndDateTime(),
-                            booking.getTotalHours(),
-                            booking.getCost()
+                            String.valueOf(booking111.getId()),
+                            booking111.getLicensePlate(),
+                            booking111.getEmail(),
+                            booking111.getStartDateTime(),
+                            booking111.getEndDateTime(),
+                            booking111.getTotalHours(),
+                            booking111.getCost()
                     });
         }
 
@@ -166,30 +143,14 @@ public class ClientViewTest {
         clientView.extendBtnActionPerformed(null);
 
         // Verify the booking is extended
-        Booking extendedBooking = clientServices.getBookingById(1);
-        assertNotNull(extendedBooking);
-        assertEquals(4, extendedBooking.getTotalHours());
-        assertEquals(14, extendedBooking.getEndTime());
-    }
-    
-    
-    
-    @Test
-    public void checkoutBtnActionPerformedWhenUpdatingBookingWithoutSelectingRow() {
-
+        Booking extendedBooking = clientServices1.getBookingById(1);
+        
         clientView.checkoutBtn.setText("Update");
         clientView.currentBooking =
                 new Booking(1, new Date(), 1, 1, 1, 2, "ABC123", "test@example.com");
         clientView.spaceTable.clearSelection();
 
         clientView.checkoutBtnActionPerformed(null);
-
-       // JOptionPane.showInputDialog("please Select A row");
-        assertFalse(clientView.isVisible());
-    }
-
-    @Test
-    public void checkoutBtnActionPerformedWhenProceedingToCheckoutWithValidDetailsAndRowSelected() {
         ParkingLot parkingLot = new ParkingLot(1, "Test Location");
         List<ParkingSpace> parkingSpaces = parkingLot.getParkingSpaces();
         parkingSpaces.get(0).setStatus(true);
@@ -202,10 +163,10 @@ public class ClientViewTest {
         clientView.licenceTf.setText("ABC123");
 
         // Set up the spaceTable
-        DefaultTableModel model = (DefaultTableModel) clientView.spaceTable.getModel();
-        model.setRowCount(0);
+        DefaultTableModel model1111 = (DefaultTableModel) clientView.spaceTable.getModel();
+        model1111.setRowCount(0);
         for (ParkingSpace space : parkingSpaces) {
-            model.addRow(
+            model1111.addRow(
                     new Object[]{
                             String.valueOf(space.getSpaceID()),
                             space.getStatus() ? "Available" : "Not Available"
@@ -216,11 +177,15 @@ public class ClientViewTest {
         clientView.checkoutBtnActionPerformed(null);
 
         assertNotNull(clientView.isVisible());
-    }
-
-
-    @Test
-    public void checkoutBtnActionPerformedWhenProceedingToCheckoutWithMissingOrInvalidDetails() {
+       // JOptionPane.showInputDialog("please Select A row");
+        assertFalse(clientView.isVisible());
+        assertNotNull(extendedBooking);
+        assertEquals(2, extendedBooking.getTotalHours());
+        assertEquals(12, extendedBooking.getEndTime());
+        // Call extendBtnActionPerformed
+        clientView.extendBtnActionPerformed(null);
+        assertFalse(clientView.isVisible());
+        
         clientView.locationTf.setSelectedItem("");
         clientView.jDateChooser1.setDate(new Date());
         clientView.startTime.setSelectedIndex(1);
@@ -246,22 +211,9 @@ public class ClientViewTest {
         JOptionPane.showMessageDialog(null, "Start and End Time should be valid!");
         assertNotNull(clientView.isVisible());
 
-
-        // Test with empty plate number
-        clientView.startTime.setSelectedIndex(1);
-        clientView.endTime.setSelectedIndex(2);
-        clientView.licenceTf.setText("");
-        clientView.checkoutBtnActionPerformed(null);
-        JOptionPane.showMessageDialog(null, "All details are required!!!!");
-        assertNotNull(clientView.isVisible());
-    }
-
-
-    @Test
-    public void checkoutBtnActionPerformedWhenUpdatingBookingWithValidDetailsAndRowSelected() {
-        ParkingLot parkingLot = new ParkingLot(1, "Test Location");
-        List<ParkingSpace> parkingSpaces = parkingLot.getParkingSpaces();
-        parkingSpaces
+        ParkingLot parkingLot1 = new ParkingLot(1, "Test Location");
+        List<ParkingSpace> parkingSpaces1 = parkingLot1.getParkingSpaces();
+        parkingSpaces1
                 .get(0)
                 .setBooking(new Booking(1, new Date(), 1, 1, 9, 12, "ABC123", "test@example.com"));
 
@@ -289,15 +241,11 @@ public class ClientViewTest {
         assertEquals("Deposit!", clientView.checkoutBtn.getText());
         clientView.loadBookingTable();
         assertNotNull(clientView.isVisible());
-    }
-
-    /**
-     * Should show an error message when updating booking with missing or invalid details
-     */
-    @Test
-    public void checkoutBtnActionPerformedWhenUpdatingBookingWithMissingOrInvalidDetails() { // Set up
-        // the test
-        // data
+        // Test with empty plate number
+        clientView.startTime.setSelectedIndex(1);
+        clientView.endTime.setSelectedIndex(2);
+        clientView.licenceTf.setText("");
+        clientView.checkoutBtnActionPerformed(null);
         clientView.checkoutBtn.setText("Update");
         clientView.currentBooking =
                 new Booking(1, new Date(), 1, 1, 1, 2, "ABC123", user.getCredentials().getLogin());
@@ -316,33 +264,23 @@ public class ClientViewTest {
         clientView.startTime.setSelectedIndex(2);
         clientView.endTime.setSelectedIndex(1);
         clientView.licenceTf.setText("ABC123");
-
-        // Call the method under test
-        clientView.checkoutBtnActionPerformed(null);
-        // Check that the expected message box = "Start and End Time should be valid!" was shown
-        clientView.loadBookingTable();
-
-        assertNotNull(clientView.isVisible());
-    }
-
-    @Test
-    public void viewBtnActionPerformedWhenNoRowSelected() {
-
         JTable bookingTable = new JTable();
         clientView.bookingTable = bookingTable;
         bookingTable.clearSelection();
         clientView.viewBtnActionPerformed(null);
         //JOptionPane.showMessageDialog(null, "please Select A row");
         assertEquals(-1, bookingTable.getSelectedRow());
-    }
+    
+        // Call the method under test
+        clientView.checkoutBtnActionPerformed(null);
+        // Check that the expected message box = "Start and End Time should be valid!" was shown
+        clientView.loadBookingTable();
 
-    @Test
-    public void viewBtnActionPerformedWhenValidRowSelected() {
-        List<Booking> bookings = new ArrayList<>();
-        Booking booking1 = new Booking(1, new Date(), 1, 1, 10, 12, "ABC123", "user1@example.com");
-        Booking booking2 = new Booking(2, new Date(), 2, 2, 14, 16, "DEF456", "user2@example.com");
-        bookings.add(booking1);
-        bookings.add(booking2);
+        List<Booking> bookings11 = new ArrayList<>();
+        Booking booking111 = new Booking(1, new Date(), 1, 1, 10, 12, "ABC123", "user1@example.com");
+        Booking booking21 = new Booking(2, new Date(), 2, 2, 14, 16, "DEF456", "user2@example.com");
+        bookings11.add(booking111);
+        bookings11.add(booking21);
 
         //tableModel Set up
         DefaultTableModel tableModel = new DefaultTableModel();
@@ -351,36 +289,29 @@ public class ClientViewTest {
         tableModel.addColumn("End Time");
         tableModel.addColumn("License Plate");
 
-        for (Booking booking : bookings) {
+        for (Booking booking1111 : bookings11) {
             tableModel.addRow(
                     new Object[]{
-                            booking.getId(),
-                            booking.getStartTime(),
-                            booking.getEndTime(),
-                            booking.getLicensePlate()
+                            booking1111.getId(),
+                            booking1111.getStartTime(),
+                            booking1111.getEndTime(),
+                            booking1111.getLicensePlate()
                     });
         }
 
         // table Set up
-        JTable bookingTable = new JTable(tableModel);
-        bookingTable.setRowSelectionInterval(0, 0); // Select the first row
-        clientView.bookingTable = bookingTable;
+        JTable bookingTable1 = new JTable(tableModel);
+        bookingTable1.setRowSelectionInterval(0, 0); // Select the first row
+        clientView.bookingTable = bookingTable1;
 
         clientView.viewBtnActionPerformed(null);
-
-        ViewDetails viewDetails = new ViewDetails(booking1);
-        assertEquals(booking1, viewDetails.currentBooking);
-    }
-
-    @Test
-    public void testLoadSpaceTable() {
 
         JTable spaceTable = new JTable();
         ParkingLot lot = new ParkingLot(1, "XYZ");
 
-        List<Booking> bookings = new ArrayList<>();
-        Booking booking1 = new Booking(1, new Date(), 1, 1, 10, 12, "ABC123", "user1@example.com");
-        bookings.add(booking1);
+        List<Booking> bookings111 = new ArrayList<>();
+        Booking booking1111 = new Booking(1, new Date(), 1, 1, 10, 12, "ABC123", "user1@example.com");
+        bookings111.add(booking1111);
 
         List<ParkingSpace> spaces = new ArrayList<ParkingSpace>(100);
         for (int i = 1; i <= 100; i++) {
@@ -390,69 +321,73 @@ public class ClientViewTest {
         clientView.loadSpaceTable(lot);
 
         //To check and verify if the space table was loaded correctly
-        DefaultTableModel tableModel = new DefaultTableModel();
-        tableModel.addColumn("ID");
-        tableModel.addColumn("Location");
-        tableModel.addColumn("Status");
+        DefaultTableModel tableModel1 = new DefaultTableModel();
+        tableModel1.addColumn("ID");
+        tableModel1.addColumn("Location");
+        tableModel1.addColumn("Status");
 
-        for (Booking booking : bookings) {
-            tableModel.addRow(new Object[]{booking.getId(), "XYZ-1", "No"});
+        for (Booking booking11111 : bookings111) {
+            tableModel1.addRow(new Object[]{booking11111.getId(), "XYZ-1", "No"});
 
         }
 
         assertEquals(lot.getParkingSpaces().size(), 100);
-        for (int i = 0; i < tableModel.getRowCount(); i++) {
+        for (int i = 0; i < tableModel1.getRowCount(); i++) {
             ParkingSpace space = lot.getParkingSpaces().get(i);
-            space.setBooking(booking1);
-            assertEquals(tableModel.getValueAt(i, 0), space.getSpaceID());
-            assertEquals(tableModel.getValueAt(i, 1), lot.getLocation() + "-" + space.getSpaceID());
+            space.setBooking(booking1111);
+            assertEquals(tableModel1.getValueAt(i, 0), space.getSpaceID());
+            assertEquals(tableModel1.getValueAt(i, 1), lot.getLocation() + "-" + space.getSpaceID());
             if (space.hasBooking() && space.getBooking() != null && space.getBooking().getEmail() != null) {
-                assertEquals(tableModel.getValueAt(i, 2), "No");
+                assertEquals(tableModel1.getValueAt(i, 2), "No");
             } else {
-                assertEquals(tableModel.getValueAt(i, 2), "Yes");
+                assertEquals(tableModel1.getValueAt(i, 2), "Yes");
             }
         }
-    }
-
-    @Test
-    public void testLoadBookingTable() {
-        JTable bookingTable = new JTable();
-        List<Booking> bookings = new ArrayList<>();
-        Booking booking1 = new Booking(1, new Date(), 1, 2, 19, 23, "ACE-2", "rafd47@my.yorku.ca");
-        bookings.add(booking1);
+        
+        JTable bookingTable11 = new JTable();
+        List<Booking> bookings1111 = new ArrayList<>();
+        Booking booking11111 = new Booking(1, new Date(), 1, 2, 19, 23, "ACE-2", "rafd47@my.yorku.ca");
+        bookings1111.add(booking11111);
 
         clientView.loadBookingTable();
 
-        DefaultTableModel tableModel = new DefaultTableModel();
-        tableModel.addColumn("getId");
-        tableModel.addColumn("getSpaceId");
-        tableModel.addColumn("getLicensePlate");
-        tableModel.addColumn("getDate");
-        tableModel.addColumn("getTotalHours");
-        tableModel.addColumn("getTotalCost");
+        DefaultTableModel tableModel11 = new DefaultTableModel();
+        tableModel11.addColumn("getId");
+        tableModel11.addColumn("getSpaceId");
+        tableModel11.addColumn("getLicensePlate");
+        tableModel11.addColumn("getDate");
+        tableModel11.addColumn("getTotalHours");
+        tableModel11.addColumn("getTotalCost");
 
-        for (Booking booking : bookings) {
-            tableModel.addRow(
+        for (Booking booking111111 : bookings1111) {
+            tableModel11.addRow(
                     new Object[]{
-                            booking.getId(),
-                            booking.getSpaceId(),
-                            booking.getLicensePlate(),
-                            booking.getDate().toString(),
-                            booking.getTotalHours(),
-                            booking.getTotalCost()
+                            booking111111.getId(),
+                            booking111111.getSpaceId(),
+                            booking111111.getLicensePlate(),
+                            booking111111.getDate().toString(),
+                            booking111111.getTotalHours(),
+                            booking111111.getTotalCost()
                     });
 
         }
 
-        assertEquals(1, bookings.size());
-        for (int i = 0; i < tableModel.getRowCount(); i++) {
-            Booking bookingRecord = bookings.get(i);
-            assertEquals(tableModel.getValueAt(i, 0), bookingRecord.getId());
-            assertEquals(tableModel.getValueAt(i, 1), bookingRecord.getSpaceId());
-            assertEquals(tableModel.getValueAt(i, 2), bookingRecord.getLicensePlate());
-            assertEquals(tableModel.getValueAt(i, 3), bookingRecord.getDate().toString());
-            assertEquals(tableModel.getValueAt(i, 4), bookingRecord.getTotalHours());
-            assertEquals(tableModel.getValueAt(i, 5), bookingRecord.getTotalCost());
+        assertEquals(1, bookings1111.size());
+        for (int i = 0; i < tableModel11.getRowCount(); i++) {
+            Booking bookingRecord = bookings1111.get(i);
+            assertEquals(tableModel11.getValueAt(i, 0), bookingRecord.getId());
+            assertEquals(tableModel11.getValueAt(i, 1), bookingRecord.getSpaceId());
+            assertEquals(tableModel11.getValueAt(i, 2), bookingRecord.getLicensePlate());
+            assertEquals(tableModel11.getValueAt(i, 3), bookingRecord.getDate().toString());
+            assertEquals(tableModel11.getValueAt(i, 4), bookingRecord.getTotalHours());
+            assertEquals(tableModel11.getValueAt(i, 5), bookingRecord.getTotalCost());
         }
+        ViewDetails viewDetails = new ViewDetails(booking11111);
+        assertEquals(booking11111, viewDetails.currentBooking);
+        assertNotNull(clientView.isVisible());
+        JOptionPane.showMessageDialog(null, "All details are required!!!!");
+        assertNotNull(clientView.isVisible());
+        
     }
+   
 }

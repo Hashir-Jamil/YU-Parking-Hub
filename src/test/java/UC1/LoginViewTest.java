@@ -32,11 +32,7 @@ public class LoginViewTest {
     public void loginViewTest() {
         loginView = new LoginView();
         assertTrue(loginView.getViewOpened());
-    }
-    
-    @Test
-    public void loginBtnActionPerformedWhenEmailAndPasswordAreCorrect() {
-        loginView = new LoginView();
+        
         loginView.emailTf = new JTextField();
         loginView.passTf = new JPasswordField();
         String email = "test@example.com";
@@ -49,5 +45,6 @@ public class LoginViewTest {
 
         assertTrue(loginView.getViewOpened());
     }
+    
 
 }
