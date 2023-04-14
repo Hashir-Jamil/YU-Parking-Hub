@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SuperManagerServices.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">RegressionTest0 Coverage Results</a> &gt; <a href="index.source.html" class="el_package">services</a> &gt; <span class="el_source">SuperManagerServices.java</span></div><h1>SuperManagerServices.java</h1><pre class="source lang-java linenums">package services;
+
+import model.user.User;
+import repo.RepositoryProvider;
+import repo.UserRepository;
+
+import java.util.Random;
+
+public class SuperManagerServices {
+    private static final String CHAR_LOWER = &quot;abcdefghijklmnopqrstuvwxyz&quot;;
+<span class="fc" id="L11">    private static final String CHAR_UPPER = CHAR_LOWER.toUpperCase();</span>
+    private static final String NUMBER = &quot;0123456789&quot;;
+<span class="fc" id="L13">    private static final String EMAIL_ALLOW_BASE = CHAR_LOWER + CHAR_UPPER + NUMBER + &quot;_.&quot;;</span>
+    private static final String OTHER_CHAR = &quot;!@#$%&amp;*()_+-=[]?&quot;;
+<span class="fc" id="L15">    private static final String PASSWORD_ALLOW_BASE = CHAR_LOWER + CHAR_UPPER + NUMBER + OTHER_CHAR;</span>
+<span class="fc" id="L16">    private static final Random random = new Random();</span>
+<span class="fc" id="L17">    private static SuperManagerServices instance = new SuperManagerServices();</span>
+<span class="fc" id="L18">    RepositoryProvider repositoryProvider = new RepositoryProvider();</span>
+<span class="fc" id="L19">    private UserRepository userRepository = repositoryProvider.getUserRepository();</span>
+
+<span class="fc" id="L21">    private SuperManagerServices() {</span>
+<span class="fc" id="L22">    }</span>
+
+    public static SuperManagerServices getInstance() {
+<span class="fc" id="L25">        return instance;</span>
+    }
+
+
+    public String createAccount(User user) {
+<span class="nc bnc" id="L30" title="All 2 branches missed.">        if (isUserAlreadyExist(user))</span>
+<span class="nc" id="L31">            return &quot;User is already Exist&quot;;</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">        else if (!isValidEmail(user.getCredentials().getLogin())) {</span>
+<span class="nc" id="L33">            return &quot;Your Email is not valid&quot;;</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        } else if (!isStrongPassword(user.getCredentials().getPassword())) {</span>
+<span class="nc" id="L35">            return &quot;Please Use a strong password&quot;;</span>
+        } else {
+<span class="nc" id="L37">            userRepository.addUser(user);</span>
+<span class="nc" id="L38">            return &quot;success&quot;;</span>
+        }
+    }
+
+    private boolean isUserAlreadyExist(User user) {
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">        for (User userRepositoryUser : userRepository.getUsers()) {</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">            if (userRepositoryUser.getCredentials().equals(user.getCredentials())) {</span>
+<span class="nc" id="L45">                return true;</span>
+            }
+<span class="nc" id="L47">        }</span>
+<span class="nc" id="L48">        return false;</span>
+    }
+
+    public String generateRandomEmail() {
+<span class="fc" id="L52">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L53">        int length = random.nextInt(10) + 5; // Random length between 5 and 14</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        for (int i = 0; i &lt; length; i++) {</span>
+<span class="fc" id="L55">            int index = random.nextInt(EMAIL_ALLOW_BASE.length());</span>
+<span class="fc" id="L56">            sb.append(EMAIL_ALLOW_BASE.charAt(index));</span>
+        }
+<span class="fc" id="L58">        sb.append(&quot;@example.com&quot;);</span>
+<span class="fc" id="L59">        return sb.toString();</span>
+    }
+
+    public String generateStrongPassword() {
+<span class="fc" id="L63">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L64">        int length = 9; // Length of the password</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        for (int i = 0; i &lt; length; i++) {</span>
+<span class="fc" id="L66">            int index = random.nextInt(PASSWORD_ALLOW_BASE.length());</span>
+<span class="fc" id="L67">            sb.append(PASSWORD_ALLOW_BASE.charAt(index));</span>
+        }
+<span class="fc" id="L69">        return sb.toString();</span>
+    }
+
+    public boolean isValidEmail(String email) {
+<span class="fc" id="L73">        String regex = &quot;^[a-zA-Z0-9_+&amp;*-]+(?:\\.&quot; +</span>
+                &quot;[a-zA-Z0-9_+&amp;*-]+)*@&quot; +
+                &quot;(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$&quot;;
+<span class="fc" id="L76">        return email.matches(regex);</span>
+    }
+
+    public boolean isStrongPassword(String password) {
+<span class="fc" id="L80">        String regex = &quot;^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&amp;+=])(?=\\S+$).{8,}$&quot;;</span>
+<span class="fc" id="L81">        return password.matches(regex);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -27,9 +27,11 @@ public class ClientServices {
 
     public ParkingLot getParkingLotByAddress(String address) {
         List<ParkingLot> parkingLotList = parkingRepository.getAllParkingLots();
-        for (ParkingLot lot : parkingLotList) {
-            if (lot.getLocation().equalsIgnoreCase(address)) {
-                return lot;
+        if (parkingLotList != null) {
+            for (ParkingLot lot : parkingLotList) {
+                if (lot.getLocation().equalsIgnoreCase(address)) {
+                    return lot;
+                }
             }
         }
         return null;

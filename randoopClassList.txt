@@ -21,6 +21,10 @@ repo.Repository
 repo.RepositoryProvider
 repo.UserRepository
 
+services.ClientServices
+services.ManagerServices
+services.SuperManagerServices
+services.UserService
 
 strategy.FacultyParkingRate
 strategy.NonFacultyParkingRate

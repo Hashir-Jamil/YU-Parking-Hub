@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ParkingLot.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">RegressionTest0 Coverage Results</a> &gt; <a href="index.source.html" class="el_package">model.parking</a> &gt; <span class="el_source">ParkingLot.java</span></div><h1>ParkingLot.java</h1><pre class="source lang-java linenums">package model.parking;
+
+import java.util.ArrayList;
+import java.util.List;
+
+//Parking Lot Class. Represents the parking lots.
+public class ParkingLot {
+
+    private int LotID;
+    private String location;
+    private List&lt;ParkingSpace&gt; parkingSpaces;
+    private boolean status;
+
+<span class="fc" id="L14">    public ParkingLot(int LotID, String location) {</span>
+<span class="fc" id="L15">        this.LotID = LotID;</span>
+<span class="fc" id="L16">        this.location = location;</span>
+<span class="fc" id="L17">        this.status = true;</span>
+
+<span class="fc" id="L19">        parkingSpaces = new ArrayList&lt;ParkingSpace&gt;(100);</span>
+
+<span class="fc bfc" id="L21" title="All 2 branches covered.">        for (int i = 1; i &lt;= 100; i++) {</span>
+<span class="fc" id="L22">            parkingSpaces.add(new ParkingSpace(i));</span>
+        }
+<span class="fc" id="L24">    }</span>
+
+    public String disableParkingLot() {
+
+        //only disable if parking lot is enabled
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        if (this.status == true) {</span>
+            //Check if there are any bookings in the parking lot. If there are none, disable parking lot. Else, do not disable parking lot.
+<span class="fc" id="L31">            boolean hasBookings = false;</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">            for (int i = 0; i &lt; 100; i++) {</span>
+<span class="fc" id="L33">                ParkingSpace currentSpace = parkingSpaces.get(i);</span>
+
+                //Check if any of the spaces have spaces
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">                if (currentSpace.hasBooking()) {</span>
+<span class="nc" id="L37">                    hasBookings = true;</span>
+<span class="nc" id="L38">                    break;</span>
+                }
+            }
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">            if (!hasBookings) {</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">                this.status = !status;</span>
+<span class="fc" id="L43">                return &quot;Success: Parking Lot &quot; + this.LotID + &quot; has been disabled.&quot;;</span>
+            }
+<span class="nc" id="L45">        } else {</span>
+<span class="fc" id="L46">            return &quot;Parking Lot &quot; + this.LotID + &quot; is already disabled.&quot;;</span>
+        }
+
+<span class="nc" id="L49">        return &quot;Failure: Parking Lot &quot; + this.LotID + &quot; has active bookings. Parking Lot has not been disabled.&quot;;</span>
+    }
+
+    public String enableParkingLot() {
+
+        //only enable parking lot if it is disabled.
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (this.status == false) {</span>
+<span class="fc" id="L56">            this.status = true;</span>
+<span class="fc" id="L57">            return &quot;Success: Parking Lot &quot; + this.LotID + &quot; has been enabled.&quot;;</span>
+        } else {
+<span class="fc" id="L59">            return &quot;Parking Lot &quot; + this.LotID + &quot; is already enabled.&quot;;</span>
+        }
+    }
+
+    public int getLotID() {
+<span class="fc" id="L64">        return LotID;</span>
+    }
+
+    public void setLotID(int lotID) {
+<span class="fc" id="L68">        LotID = lotID;</span>
+<span class="fc" id="L69">    }</span>
+
+    public boolean getStatus() {
+<span class="fc" id="L72">        return status;</span>
+    }
+
+    public String getLocation() {
+<span class="fc" id="L76">        return location;</span>
+    }
+
+    public void setLocation(String location) {
+<span class="fc" id="L80">        this.location = location;</span>
+<span class="fc" id="L81">    }</span>
+
+    public List&lt;ParkingSpace&gt; getParkingSpaces() {
+<span class="fc" id="L84">        return parkingSpaces;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

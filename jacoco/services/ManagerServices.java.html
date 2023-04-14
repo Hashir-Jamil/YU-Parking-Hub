@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ManagerServices.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">RegressionTest0 Coverage Results</a> &gt; <a href="index.source.html" class="el_package">services</a> &gt; <span class="el_source">ManagerServices.java</span></div><h1>ManagerServices.java</h1><pre class="source lang-java linenums">package services;
+
+import model.parking.ParkingLot;
+import repo.ParkingRepository;
+import repo.RepositoryProvider;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ManagerServices {
+
+    public static List&lt;ParkingLot&gt; parkingLots;
+<span class="fc" id="L13">    private static ManagerServices managerServices = new ManagerServices();</span>
+<span class="fc" id="L14">    RepositoryProvider repositoryProvider = new RepositoryProvider();</span>
+<span class="fc" id="L15">    private ParkingRepository parkingRepository = repositoryProvider.getParkingRepository();</span>
+
+<span class="fc" id="L17">    private ManagerServices(){</span>
+<span class="fc" id="L18">        this.loadLots();</span>
+<span class="fc" id="L19">    }</span>
+    public static ManagerServices getInstance() {
+<span class="fc" id="L21">        return managerServices;</span>
+    }
+
+    public void loadLots() {
+<span class="fc" id="L25">        parkingLots = getAllParkingLots();</span>
+<span class="fc" id="L26">    }</span>
+
+    public void updateParkingLots(List&lt;ParkingLot&gt; parkingLots) {
+<span class="fc" id="L29">        parkingRepository.updateParkingLots(parkingLots);</span>
+<span class="fc" id="L30">    }</span>
+
+    public ArrayList&lt;ParkingLot&gt; getAllParkingLots() {
+<span class="fc" id="L33">        return parkingRepository.getAllParkingLots();</span>
+    }
+
+
+    public void addParkingLot(ParkingLot lot) {
+<span class="fc" id="L38">        parkingLots.add(lot);</span>
+<span class="fc" id="L39">        parkingRepository.updateParkingLots(parkingLots);</span>
+<span class="fc" id="L40">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

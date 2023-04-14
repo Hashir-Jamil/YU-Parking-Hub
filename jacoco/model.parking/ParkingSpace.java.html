@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ParkingSpace.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">RegressionTest0 Coverage Results</a> &gt; <a href="index.source.html" class="el_package">model.parking</a> &gt; <span class="el_source">ParkingSpace.java</span></div><h1>ParkingSpace.java</h1><pre class="source lang-java linenums">package model.parking;
+
+import model.booking.Booking;
+import model.sensor.Sensor;
+
+
+public class ParkingSpace {
+
+    private int spaceID;
+
+    private Booking booking;
+    private boolean status;
+    private Sensor sensor;
+
+<span class="fc" id="L15">    public ParkingSpace(int spaceID) {</span>
+<span class="fc" id="L16">        this.spaceID = spaceID;</span>
+<span class="fc" id="L17">        this.status = true;</span>
+<span class="fc" id="L18">        sensor = new Sensor();</span>
+<span class="fc" id="L19">        booking = null;</span>
+<span class="fc" id="L20">    }</span>
+
+    public String disableParkingSpace() {
+        //only disable if parking space is enabled
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (this.status == true) {</span>
+
+            //Check if there are any bookings in the park ing space. If there are none, disable parking space. Else, do not disable parking space.
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">            if (booking == null) {</span>
+<span class="fc" id="L28">                this.status = false;</span>
+<span class="fc" id="L29">                return &quot;Success: Parking Space &quot; + this.spaceID + &quot; has been disabled.&quot;;</span>
+            }
+        } else {
+<span class="fc" id="L32">            return &quot;Parking Space &quot; + this.spaceID + &quot; is already disabled.&quot;;</span>
+        }
+<span class="nc" id="L34">        return &quot;Failure: Parking Space &quot; + this.spaceID + &quot; has active bookings. Parking Space has not been disabled.&quot;;</span>
+    }
+
+    public String enableParkingSpace() {
+
+        //only enable parking space if it is disabled.
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (this.status == false) {</span>
+<span class="fc" id="L41">            this.status = true;</span>
+<span class="fc" id="L42">            return &quot;Success: Parking Space &quot; + this.spaceID + &quot; has been enabled.&quot;;</span>
+        } else {
+<span class="fc" id="L44">            return &quot;Parking Space &quot; + this.spaceID + &quot; is already enabled.&quot;;</span>
+        }
+    }
+
+
+    public int getSpaceID() {
+<span class="fc" id="L50">        return spaceID;</span>
+    }
+
+    public void setSpaceID(int spaceID) {
+<span class="fc" id="L54">        this.spaceID = spaceID;</span>
+<span class="fc" id="L55">    }</span>
+
+    public boolean hasBooking() {
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        return booking != null;</span>
+    }
+
+    public Booking getBooking() {
+<span class="fc" id="L62">        return booking;</span>
+    }
+
+    public void setBooking(Booking booking) {
+<span class="fc" id="L66">        this.booking = booking;</span>
+<span class="fc" id="L67">    }</span>
+
+    public Sensor getSensor() {
+<span class="fc" id="L70">        return this.sensor;</span>
+    }
+
+    public boolean getStatus() {
+<span class="fc" id="L74">        return this.status;</span>
+    }
+
+    public void setStatus(boolean status) {
+<span class="fc" id="L78">        this.status = status;</span>
+<span class="fc" id="L79">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

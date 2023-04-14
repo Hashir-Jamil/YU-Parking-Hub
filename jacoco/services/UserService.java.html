@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">RegressionTest0 Coverage Results</a> &gt; <a href="index.source.html" class="el_package">services</a> &gt; <span class="el_source">UserService.java</span></div><h1>UserService.java</h1><pre class="source lang-java linenums">package services;
+
+import model.user.User;
+import repo.RepositoryProvider;
+import repo.UserRepository;
+
+public class UserService {
+
+
+<span class="fc" id="L10">    private static UserService userService = new UserService();</span>
+<span class="fc" id="L11">    RepositoryProvider repositoryProvider = new RepositoryProvider();</span>
+<span class="fc" id="L12">    public final UserRepository userRepository = repositoryProvider.getUserRepository();</span>
+
+<span class="fc" id="L14">    public UserService() {</span>
+
+<span class="fc" id="L16">    }</span>
+
+    public static UserService getInstance() {
+<span class="fc" id="L19">        return userService;</span>
+    }
+
+    public String registerUser(User user) {
+<span class="nc bnc" id="L23" title="All 2 branches missed.">        if (isUserAlreadyExist(user))</span>
+<span class="nc" id="L24">            return &quot;User is already Exist&quot;;</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">        else if (!isValidEmail(user.getCredentials().getLogin())) {</span>
+<span class="nc" id="L26">            return &quot;Your Email is not valid&quot;;</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">        } else if (!isStrongPassword(user.getCredentials().getPassword())) {</span>
+<span class="nc" id="L28">            return &quot;Please Use a strong password&quot;;</span>
+        } else {
+<span class="nc" id="L30">            userRepository.addUser(user);</span>
+<span class="nc" id="L31">            return &quot;success&quot;;</span>
+        }
+    }
+
+    public User loginUser(String email, String password) {
+<span class="nc bnc" id="L36" title="All 2 branches missed.">        for (User user : userRepository.getUsers()) {</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">            if (user.getCredentials().getLogin().equals(email)</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">                    &amp;&amp; user.getCredentials().getPassword().equals(password)) {</span>
+<span class="nc" id="L39">                return user;</span>
+            }
+<span class="nc" id="L41">        }</span>
+<span class="nc" id="L42">        return null;</span>
+    }
+
+    private boolean isUserAlreadyExist(User user) {
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">        for (User userRepositoryUser : userRepository.getUsers()) {</span>
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">            if (userRepositoryUser.getCredentials().equals(user.getCredentials())) {</span>
+<span class="nc" id="L48">                return true;</span>
+            }
+<span class="fc" id="L50">        }</span>
+<span class="nc" id="L51">        return false;</span>
+    }
+
+    public User getUserByEmail(String email) {
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        for (User userRepositoryUser : userRepository.getUsers()) {</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">            if (userRepositoryUser.getCredentials().getLogin().equals(email)) {</span>
+<span class="nc" id="L57">                return userRepositoryUser;</span>
+            }
+<span class="nc" id="L59">        }</span>
+<span class="nc" id="L60">        return null;</span>
+    }
+
+    public boolean isValidEmail(String email) {
+<span class="fc" id="L64">        String regex = &quot;^[a-zA-Z0-9_+&amp;*-]+(?:\\.&quot; +</span>
+                &quot;[a-zA-Z0-9_+&amp;*-]+)*@&quot; +
+                &quot;(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$&quot;;
+<span class="fc" id="L67">        return email.matches(regex);</span>
+    }
+
+    public boolean isStrongPassword(String password) {
+<span class="fc" id="L71">        String regex = &quot;^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&amp;+=])(?=\\S+$).{8,}$&quot;;</span>
+<span class="fc" id="L72">        return password.matches(regex);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
